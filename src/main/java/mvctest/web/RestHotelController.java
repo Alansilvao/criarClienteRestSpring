@@ -32,7 +32,10 @@ public class RestHotelController {
 	Endereco idCidade = new Endereco();
 
 	String latLong = "https://www.metaweather.com/api/location/search/?lattlong=" + consulta.endereco.getLoc();
-
+	
+	  
+	
+	
 	ResponseEntity<List<Endereco>> listaLatitudeLong = template.exchange(latLong, HttpMethod.GET, null,
 			new ParameterizedTypeReference<List<Endereco>>() {
 			});
@@ -40,11 +43,19 @@ public class RestHotelController {
 
 	private ClienteRepository clienteRepository;
 
+	
+	
 	@Autowired
 	public RestHotelController(ClienteRepository clienteRepository) {
 		this.clienteRepository = clienteRepository;
 	}
-
+	/** Método para criar novo funcionario
+	 * POST /rest/hotels – cria um novo cliente
+	* {
+    * "nome": "Inserir nome do cliente",
+    *  "idade": "inserir idade do cliente"
+	*	}
+     */
 	@RequestMapping(method = RequestMethod.POST)
 	public Hotel create(@RequestBody @Valid Hotel cliente) {
 
@@ -64,21 +75,49 @@ public class RestHotelController {
 		return this.clienteRepository.save(cliente);
 	}
 
+	/** Método Para listar todos os clientes salvos
+	* GET /rest/hotels
+
+     */
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Hotel> list() {
 		return this.clienteRepository.findAll();
 	}
 
+	
+	/** Método Para listar todos os clientes salvos
+	* 
+	* Para consultar um cliente por id
+	*GET /rest/hotels/:id
+     */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Hotel get(@PathVariable("id") long id) {
 		return this.clienteRepository.findOne(id);
 	}
 
+	/** Método Para listar todos os clientes salvos
+	* 
+	* Para atualizar um cliente por id
+	* PUT /rest/hotels/:id
+	* 
+	* {
+	* "id": inserir id cliente,
+	* "nome": "insira nome",
+	* "idade": "inserir idade",
+	*  "cidade": " ",
+	*   "temperaturaMax": "27.8",
+	*   "temperaturaMin": "17.7"
+	*   } 
+     */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Hotel update(@PathVariable("id") long id, @RequestBody @Valid Hotel hotel) {
 		return clienteRepository.save(hotel);
 	}
 
+	
+	/** Método Remover Cliente por id
+	*DELETE /rest/hotels/:id
+     */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
 		this.clienteRepository.delete(id);
