@@ -25,13 +25,13 @@ import mvctest.service.ClienteRepository;
 @RequestMapping("/rest/hotels")
 public class RestHotelController {
 
-	Consulta testes = new Consulta();
+	Consulta consulta = new Consulta();
 
 	RestTemplate template = new RestTemplate();
 
 	Endereco idCidade = new Endereco();
 
-	String latLong = "https://www.metaweather.com/api/location/search/?lattlong=" + testes.endereco.getLoc();
+	String latLong = "https://www.metaweather.com/api/location/search/?lattlong=" + consulta.endereco.getLoc();
 
 	ResponseEntity<List<Endereco>> listaLatitudeLong = template.exchange(latLong, HttpMethod.GET, null,
 			new ParameterizedTypeReference<List<Endereco>>() {
@@ -59,7 +59,7 @@ public class RestHotelController {
 			cliente.setTemperaturaMax(quote1.getMax_temp().substring(0, 4));
 			cliente.setTemperaturaMin(quote1.getMin_temp().substring(0, 4));
 		}
-			cliente.setCidade(testes.endereco.getCity());
+			cliente.setCidade(consulta.endereco.getCity());
 				
 		return this.clienteRepository.save(cliente);
 	}
