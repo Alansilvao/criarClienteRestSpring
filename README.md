@@ -3,7 +3,7 @@ Documentação:
 
 Como executar o projeto:
 Na pasta onde foi feito o clone do repositorio:
-Execute usando o comando maven: mvn spring-boot: run
+-Execute usando o comando maven: mvn spring-boot: run
 
 -Acessar a pagina: http://localhost:8080/hotels 
 
