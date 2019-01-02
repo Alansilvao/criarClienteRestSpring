@@ -7,6 +7,8 @@ Na pasta onde foi feito o clone do repositorio:
 
 -Acessar a pagina: http://localhost:8080/hotels 
 
+- Para empacotar o projeto, execute o comando: mvn clean package
+
 -Como usar os serviços:
 
 Para criar um novo cliente:
